@@ -9,3 +9,7 @@ print('Slice:',countries[1:2])
 a = [1, 2, 3, 4, 5, 6, 7, 8]
 
 print(a[2:4])
+print(a[2:-1])
+print(a[2:-1:2])
+
+print(type(a))
