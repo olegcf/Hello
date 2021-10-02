@@ -13,3 +13,8 @@ print(a[2:-1])
 print(a[2:-1:2])
 
 print(type(a))
+
+i=0
+while i < len(countries):
+    i = i + 1
+    print(i)
