@@ -1,6 +1,7 @@
 # Testing file
 countries = [ 'Israel', 'Czechia', 'Ukraine', 'Moldova' ]
 
+# Print
 print(countries)
 print(countries[1])
 print(len(countries))
