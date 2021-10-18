@@ -22,3 +22,4 @@ while i < len(countries):
     i = i + 1
 blah
 blah
+print
