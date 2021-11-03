@@ -1,0 +1,45 @@
+# More examples of Codefresh YAML can be found at
+# https://codefresh.io/docs/docs/yaml-examples/examples/
+
+version: "1.0"
+# Stages can help you organize your steps in stages
+stages:
+  - "clone"
+  - "build"
+  - "printenv"
+
+steps:
+  clone:
+    title: "Cloning repository"
+    type: "git-clone"
+    repo: "${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}"
+    revision: "${{CF_BRANCH}}"
+    git: "Codefresh"
+    stage: "clone"
+    when:
+      condition:
+        all:
+          originalRepoMerged: "'${{CF_REPO_OWNER}}' == 'olegse'"
+        
+  build:
+    title: "Building Docker image"
+    type: "build"
+    image_name: "olegsergiyuk/hello"   # quay.io
+    working_directory: "${{clone}}"
+    tag: "${{CF_SHORT_REVISION}}"
+    dockerfile: "Dockerfile"
+    registry: quay
+    stage: "build"
+    when:
+      branch:
+        only:
+          - main
+  test:
+    title: "Running test"
+    type: "freestyle" # Run any command
+    image: "alpine:3" # The image in which command will be executed
+    working_directory: "${{clone}}" # Running command where code cloned
+    commands:
+      - "printenv"
+      # - "cat dictionary.py"
+    stage: "printenv"
