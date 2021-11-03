@@ -28,7 +28,7 @@ steps:
     working_directory: "${{clone}}"
     tag: "${{CF_SHORT_REVISION}}"
     dockerfile: "Dockerfile"
-    registry: quay
+    registry: DockerHub
     stage: "build"
     when:
       branch:
