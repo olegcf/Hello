@@ -7,5 +7,5 @@ services:
     volumes:
       - type: bind
         source: ./ssl
-        destination: /home/ssl
+        target: /home/ssl
       #- "./conf.d/default.conf:/etc/nginx/conf.d/default.conf"
