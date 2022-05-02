@@ -6,6 +6,6 @@ services:
       - "8080:80"
     volumes:
       - type: bind
-        source: ./ssl
+        source: /var/lib/docker/volumes/${CF_VOLUME_NAME}/_data/${CF_REPO_NAME}/ssl
         target: /home/ssl
       #- "./conf.d/default.conf:/etc/nginx/conf.d/default.conf"
