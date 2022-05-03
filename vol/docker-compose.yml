@@ -4,7 +4,7 @@ services:
     image: nginx:latest
     ports:
       - "8080:80"
-    command: ls -l /codefresh/volume/home
+    command: ls -l /codefresh/volume/ssl
     volumes:
       - type: bind
         source: /var/lib/docker/volumes/${CF_VOLUME_NAME}/_data/${CF_REPO_NAME}/vol/ssl
