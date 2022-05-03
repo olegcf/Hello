@@ -7,6 +7,6 @@ services:
     command: ls -l /codefresh/volume/home
     volumes:
       - type: bind
-        source: /var/lib/docker/volumes/pipeline_625c63fe6f209f8f3d761d57_trigger_626fdf2c024748389da9e32b
-        target: /codefresh/volume/home
+        source: /var/lib/docker/volumes/${CF_VOLUME_NAME}/_data/${CF_REPO_NAME}/vol/ssl
+        target: /codefresh/volume/ssl
       #- "./conf.d/default.conf:/etc/nginx/conf.d/default.conf"
