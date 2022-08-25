@@ -1,6 +1,6 @@
 # Use an official Python runtime as a parent image
 FROM python:3.7.2-stretch
-ENV ver=0.0.1
+ENV ver=0.0.2
 
 # Set the working directory to /app
 WORKDIR /app
