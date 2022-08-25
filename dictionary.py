@@ -27,4 +27,4 @@ print
 print
 print
 print
-suka!
+s$lyat{}uka!
