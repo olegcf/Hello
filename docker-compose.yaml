@@ -1,0 +1,53 @@
+version: '3.0'
+services:
+  authz-mongo:
+    container_name: authz-mongo
+    image: bitnami/mongodb:4.4
+    ports:
+      - 27017:27017
+    volumes:
+      - ./deploy/local/volumes/mongo/db-data:/bitnami/mongodb
+    environment:
+      - MONGODB_REPLICA_SET_MODE=primary
+      - MONGODB_ADVERTISED_HOSTNAME=localhost
+      - MONGODB_ROOT_PASSWORD=password123
+      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+
+  tyk-gateway:
+    container_name: tyk-gateway
+    image: docker.tyk.io/tyk-gateway/tyk-gateway:v4.0.3
+    ports:
+      - 8080:8080
+      - 9696:9696
+    volumes:
+      - ./deploy/local/tyk-gw-cfg-local.json:/opt/tyk-gateway/tyk.conf
+      - ./deploy/local/tyk-gw-policies.json:/opt/tyk-gateway/policies/policies.json
+      - ./deploy/local/apps:/opt/tyk-gateway/apps
+      - ./deploy/local/middleware:/opt/tyk-gateway/middleware
+      - ./deploy/local/templates:/opt/tyk-gateway/templates
+    environment:
+      - TYK_GW_SECRET=foo
+      - TYK_GW_LOGLEVEL=debug
+    depends_on:
+      - tyk-redis
+
+  tyk-redis:
+    container_name: tyk-redis
+    image: bitnami/redis:6.2
+    ports:
+      - 6379:6379
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - ./deploy/local/volumes/redis/data:/bitnami/redis/data
+
+  tyk-httpbin:
+    container_name: tyk-httpbin
+    image: kennethreitz/httpbin
+    ports:
+      - 9080:80
+    depends_on:
+      - tyk-gateway
+
+networks:
+  tyk:
